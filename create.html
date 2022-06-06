@@ -60,8 +60,8 @@
 
 <!-- Header with full-height image -->
 <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home" style="text-align: center;">
-  <div class="w3-display-container w3-text-black" style="padding: 110px;">
-    <p><h1>Criar nova conta</h1></p>
+	<br/><br/><p><h1>Criar nova conta</h1></p>
+  <div id="create-account" class="w3-display-left w3-text-white" style="padding: 110px;">
     <input id="user" type="text" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" placeholder="Nome de Utilizador" style="padding:100px 4px; margin:auto; text-align:center;">
     <br/>
     <input id="morada" type="text" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" placeholder="Morada" style="padding:100px 4px; margin:auto; text-align:center;">
@@ -69,10 +69,8 @@
     <input id="email" type="text" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" placeholder="E-mail" style="padding:100px 4px; margin:auto; text-align:center;">
     <br/>
     <input id="password"  type="password" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" placeholder="PassWord" style="padding:100px 4px; margin:auto; text-align:center;">
-    <br/>
-    <input id="password"  type="password" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" placeholder="Repetir PassWord" style="padding:100px 4px; margin:auto; text-align:center;">
-    <br/>
-     <a href="paginainicial.html"><button  class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" style="width:150px; margin:auto; text-align:center;">Continuar</button></a>
+     <input id=""  type="password" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" placeholder="Repetir PassWord" style="padding:100px 4px; margin:auto; text-align:center;">
+    <button id="signup" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" style="width:150px; margin:auto; text-align:center;">Continuar</button>
   </div> 
   <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
@@ -97,6 +95,19 @@
 
 
 <script>
+if (localStorage.getItem("auth") == "true")
+  window.location.href = "paginainicial.html";
+
+var urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("status") && urlParams.get("status") == "exists")  {
+  var errorMessage = document.createElement("p");
+  var createAccountWrapper = document.getElementById("create-account");
+  document.getElementById("home").insertBefore(errorMessage, createAccountWrapper);
+  errorMessage.innerText = "There is already an account with that name!";
+  errorMessage.style.color = "red";
+  errorMessage.style.fontWeight = "bold"
+}
+
 // Modal Image Gallery
 function onClick(element) {
   document.getElementById("img01").src = element.src;
@@ -121,6 +132,26 @@ function w3_open() {
 function w3_close() {
     mySidebar.style.display = "none";
 }
+
+var signupButton = document.getElementById("signup");
+if (signupButton) {
+  signupButton.addEventListener("click", () => {
+    console.log(localStorage);
+
+    var user=document.getElementById("user");
+    var password=document.getElementById("password");
+
+    if (user && password) {
+      if (!localStorage.getItem(user.value)) {
+        localStorage.setItem(user.value, password.value);
+        window.location.href = "login.html";
+      }
+      else
+        window.location.href = "create.html?status=exists"; 
+    }
+  });
+}
+
 </script>
 
 </body>

@@ -63,12 +63,10 @@
 	<br/>
 	<br/>
 	<p><h1 >Login</h1></p>
-  <div class="w3-display-container w3-text-white" style="padding: 110px;">
+  <div id="bla" class="w3-display-left w3-text-white" style="padding: 110px;">
     <input id="user" type="text" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" placeholder="Nome de Utilizador" style="padding:100px 4px; margin:auto; text-align:center;">
-    <br/>
-    <input id="user"  type="password" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" placeholder="PassWord" style="padding:100px 4px; margin:auto; text-align:center;">
-    <br/>
-    <a href="paginainicial.html"><button  class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" style="width:150px; margin:auto; text-align:center;">Continuar</button></a>
+    <input id="password"  type="password" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" placeholder="PassWord" style="padding:100px 4px; margin:auto; text-align:center;">
+    <button id="signin" class="form-control w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" style="width:150px; margin:auto; text-align:center;">Continuar</button>
   </div> 
   <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
@@ -93,6 +91,19 @@
 
 
 <script>
+if (localStorage.getItem("auth") == "true")
+  window.location.href = "paginainicial.html";
+
+var urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("status") && urlParams.get("status") == "error")  {
+  var errorMessage = document.createElement("p");
+  var createAccountWrapper = document.getElementById("bla");
+  document.getElementById("home").insertBefore(errorMessage, createAccountWrapper);
+  errorMessage.innerText = "PassWord ou User incorreto!";
+  errorMessage.style.color = "red";
+  errorMessage.style.fontWeight = "bold"
+}
+
 // Modal Image Gallery
 function onClick(element) {
   document.getElementById("img01").src = element.src;
@@ -100,6 +111,26 @@ function onClick(element) {
   var captionText = document.getElementById("caption");
   captionText.innerHTML = element.alt;
 }
+
+var signinButton = document.getElementById("signin");
+if (signinButton) {
+  signinButton.addEventListener("click", () => {
+    console.log(localStorage);
+
+    var user=document.getElementById("user");
+    var password=document.getElementById("password");
+
+    if (user && password) {
+      if (localStorage.getItem(user.value) == password.value) {
+        localStorage.setItem("auth", true);
+        window.location.href = "paginainicial.html";
+      }
+      else
+        window.location.href = "login.html?status=error"; 
+    }
+  });
+}
+
 
 
 // Toggle between showing and hiding the sidebar when clicking the menu icon
