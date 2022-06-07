@@ -35,7 +35,7 @@
 <div >
   <div class="w3-bar w3-white w3-card" id="myNavbar">
     <a href="paginainicial.html" class="w3-bar-item w3-button w3-wide">KidsLink</a>
-    <a href="index.html" class="w3-bar-item w3-button w3-wide">LOGOUT</a>
+    
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="about.html" class="w3-bar-item w3-button">SOBRE</a>
@@ -54,18 +54,24 @@
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">FECHAR ×</a>
   <a href="about.html" onclick="w3_close()" class="w3-bar-item w3-button">SOBRE</a>
   <a href="galeria.html" onclick="w3_close()" class="w3-bar-item w3-button">GALERIA</a>
+  <button id="logout" class="w3-bar-item w3-button">LOGOUT</button>
+  <script src="logout.js"></script>
 </nav>
 
 
 
 <!-- About Section -->
 <div class="w3-container" style="padding:128px 16px" id="about">
-  <h1 class="w3-center"><b>FIM</b></h1>
-	<h3 class= "w3-center">A tua festa está a ser planeada</h3>
+  <h1 class="w3-center"><b>FIM</b></h1><br/>
+	<h3 class= "w3-center">A tua festa está a ser planeada</h3><br/>
 		<h6 class= "w3-center">Aguarda enquanto preparamos tudo o que precisas para teres a melhor festa de sempre...</h6>
-	<br/><br/><br/><br/><br/><br/><br/><br/>
-	 <center><img src="house.png" href="index.html" onclick="onClick(this)" class="w3-hover-opacity" width="50" height="50"></center>
 </div>
+<p>
+  <a href="paginainicial.html">
+    <center><img src="house.png" href="index.html" width="50" height="50"></center>
+  </a> 
+</p>
+
 	
 
 <!-- Modal for full size images on click-->
