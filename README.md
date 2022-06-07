@@ -1,2 +1,0 @@
-# ASProject
-Aplicação AS
